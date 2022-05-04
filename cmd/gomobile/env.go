@@ -24,10 +24,12 @@ var (
 )
 
 func CreatGoPkgDir(dir string) {
-	gopath := os.Getenv("GOPATH")
+	gopath := goEnv("GOPATH")
 	gopkgdir := filepath.Join(gopath, "pkg")
+	lndir := filepath.Join(dir, "pkg")
+	fmt.Printf("gopath=%s\ngopkgdir=%s\ndir=%s\nsym=%s\n", gopath, gopkgdir, dir, lndir)
 	os.RemoveAll(filepath.Join(dir, "*"))
-	os.Symlink(gopkgdir, filepath.Join(dir, "pkg"))
+	os.Symlink(gopkgdir, lndir)
 }
 
 func isAndroidPlatform(platform string) bool {
